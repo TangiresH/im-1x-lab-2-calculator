@@ -9,11 +9,11 @@ const inputArray = parse(inputString);
 
 if (inputArray) {
     const state = new CalculatorState();
+    const resultString = state.screen.toString();
 
     for (let i = 0; i < inputArray.length; i++) {
         handleKeyPress(state, inputArray[i]);
     }
 
-    fs.writeFileSync('output.txt', state.screen.toString());
-    console.log("Result has been written to output.txt");
+    writeToFile('output.txt', resultString);
 }

@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { parse, validateInput } = require('./components/parse');
 const handleKeyPress = require('./components/handleKeyPress');
+const writeToFile = require('./components/writeToFile');
+
 
 
 describe('Input functions', () => {
@@ -218,3 +220,20 @@ describe('Input functions', () => {
 
     
     });
+
+    describe('writeFile function : ', () => {
+
+      test('The function must correctly write the result to a file', () => {
+        const first_result = '15';
+        writeToFile('test-outputs/test-output-file-1.txt', first_result);
+        const content = fs.readFileSync('./test-outputs/test-output-file-1.txt', 'utf-8').trim();
+        expect(content).toBe('15');
+      });
+
+      test('The function must correctly write the result to a file', () => {
+        const first_result = '70';
+        writeToFile('test-outputs/test-output-file-1.txt', first_result);
+        const content = fs.readFileSync('./test-outputs/test-output-file-2.txt', 'utf-8').trim();
+        expect(content).toBe('70');
+      });
+  })

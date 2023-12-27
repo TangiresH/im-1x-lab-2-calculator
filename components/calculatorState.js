@@ -1,4 +1,3 @@
-// calculatorState.js
 class CalculatorState {
   constructor() {
       this.screen = 0;

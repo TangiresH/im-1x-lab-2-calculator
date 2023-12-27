@@ -1,4 +1,3 @@
-// calculate.js
 function calculate(a, b, op) {
   switch (op) {
       case '+':
