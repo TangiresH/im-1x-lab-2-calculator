@@ -12,7 +12,7 @@ function calculate(a, b, op) {
               console.error("Division by zero");
               return null;
           }
-          return a / b;
+          return Math.floor(a / b);
       default:
           console.error("Invalid operator: " + op);
           return null;
