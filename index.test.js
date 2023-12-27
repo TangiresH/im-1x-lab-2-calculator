@@ -221,7 +221,7 @@ describe('Input functions', () => {
     
     });
 
-    describe('writeFile function : ', () => {
+    describe('writeToFile function : ', () => {
 
       test('The function must correctly write the result to a file', () => {
         const first_result = '15';
