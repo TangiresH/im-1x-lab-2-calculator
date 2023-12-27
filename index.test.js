@@ -177,5 +177,44 @@ describe('Input functions', () => {
         expect(calculatorState.screen).toBe(5);
       });
 
-      
+      test('should handle invalid key', () => {
+        const inputFilePath = path.join(__dirname, './test-keypress/test-input-file-1.txt');
+        const inputString = fs.readFileSync(inputFilePath, 'utf-8').trim();
+        const inputKeys = inputString.split(' ');
+    
+        for (const key of inputKeys) {
+          handleKeyPress(calculatorState, key);
+        }
+    
+        expect(calculatorState.screen).toBe(0);
+      });
+
+      test('should handle numeric key when start_second_number is true', () => {
+        const inputFilePath = path.join(__dirname, './test-keypress/test-input-file-2.txt');
+        const inputString = fs.readFileSync(inputFilePath, 'utf-8').trim();
+        const inputKeys = inputString.split(' ');
+    
+        for (const key of inputKeys) {
+          handleKeyPress(calculatorState, key);
+        }
+    
+        expect(calculatorState.screen).toBe(33);
+      });
+
+      test('should handle empty file input', () => {
+        const inputFilePath = path.join(__dirname, './test-keypress/test-input-file-3.txt');
+        const inputString = fs.readFileSync(inputFilePath, 'utf-8').trim();
+        const inputKeys = inputString.split(' ');
+    
+        for (const key of inputKeys) {
+          handleKeyPress(calculatorState, key);
+        }
+    
+        expect(calculatorState.screen).toBe(0);
+        expect(calculatorState.op).toBeNull();
+        expect(calculatorState.first_number).toBeNull();
+        expect(calculatorState.start_second_number).toBe(false);
+      });
+
+    
     });
