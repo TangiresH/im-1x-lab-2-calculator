@@ -1,6 +1,6 @@
 // main.js
 const fs = require('fs');
-const parse = require('./components/parse');
+const { parse, validateInput } = require('./components/parse');
 const CalculatorState = require('./components/calculatorState');
 const handleKeyPress = require('./components/handleKeyPress');
 
