@@ -3,10 +3,9 @@ const path = require('path');
 const { parse, validateInput } = require('./components/parse');
 const handleKeyPress = require('./components/handleKeyPress');
 const writeToFile = require('./components/writeToFile');
+const calculate = require('./components/calculate');
 
 
-
-describe('Input functions', () => {
   describe('Parse function', () => {
     test('should return the expected result for test-input-file-5.txt', () => {
         const inputFilePath = path.join(__dirname, './test-inputs/test-parse/test-input-file-1.txt');
@@ -38,8 +37,6 @@ describe('Input functions', () => {
         expect(parse(inputString)).toEqual(["2", "5", "-", "1", "0", "="]);
       });
     });
-    
-  });
   
   
   describe('Parse function', () => {
@@ -221,6 +218,56 @@ describe('Input functions', () => {
     
     });
 
+    describe('calculate function', () => {
+      test('should add two numbers', () => {
+        const a = '10';
+        const b = '29';
+        const op = '+'
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(39);
+      });
+    
+      test('should subtract two numbers', () => {
+        const a = '50';
+        const b = '25';
+        const op = '-';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(25);
+      });
+
+      test('should multiply two numbers', () => {
+        const a = '7';
+        const b = '8';
+        const op = '*';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(56);
+      });
+
+      test('should divide two numbers', () => {
+        const a = '100';
+        const b = '5';
+        const op = '/';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(20);
+      });
+
+      test('should handle division by zero', () => {
+        const a = '42';
+        const b = '0';
+        const op = '/';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBeNull();
+      });
+
+      test('should handle invalid operator', () => {
+        const a = '10';
+        const b = '5';
+        const op = '%';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBeNull();
+      });
+    });
+
     describe('writeToFile function : ', () => {
 
       test('The function must correctly write the result to a file', () => {
@@ -235,5 +282,21 @@ describe('Input functions', () => {
         writeToFile('test-outputs/test-output-file-1.txt', first_result);
         const content = fs.readFileSync('./test-outputs/test-output-file-2.txt', 'utf-8').trim();
         expect(content).toBe('70');
+      });
+
+      test('should handle negative result', () => {
+        const a = '5';
+        const b = '10';
+        const op = '-';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(-5);
+      });
+
+      test('should handle large numbers', () => {
+        const a = '999999999';
+        const b = '1';
+        const op = '+';
+        const result = calculate(parseInt(a), parseInt(b), op);
+        expect(result).toBe(1000000000);
       });
   })
