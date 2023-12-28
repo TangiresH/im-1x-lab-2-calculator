@@ -1,4 +1,3 @@
-// main.js
 const fs = require('fs');
 const { parse, validateInput } = require('./components/parse');
 const CalculatorState = require('./components/calculatorState');
